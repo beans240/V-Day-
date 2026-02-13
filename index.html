@@ -128,6 +128,37 @@
       font-size: 0.9rem;
       opacity: 0.8;
     }
+      #lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  #lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    animation: zoomIn 0.3s ease;
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
   </style>
 </head>
 <body>
@@ -154,9 +185,9 @@
       <h2>Favorite Memories</h2>
       <p>💕</p>
       <div class="photo-grid">
-        <img src="img1.jpeg" alt="Memory 1">
-        <img src="img2.jpeg" alt="Memory 2">
-        <img src="img3.jpeg" alt="Memory 3">
+        <img src="img1.jpeg" onclick="openLightbox(this.src)">
+        <img src="img2.jpeg" onclick="openLightbox(this.src)">
+        <img src="img3.jpg"  onclick="openLightbox(this.src)">
       </div>
     </div>
 
@@ -172,5 +203,20 @@
       Made with ❤️ just for you
     </footer>
   </div>
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="">
+  </div>
+    <script>
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
+    }
+  
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
